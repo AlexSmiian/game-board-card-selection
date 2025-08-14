@@ -142,7 +142,6 @@ export const useGameStore = create<GameState>((set, get) => ({
             set({
                 showBombSaveModal: true,
                 counter: totalFromAllCards,
-                // Don't set allCardsRevealed immediately - this will be done only with loseResources
             });
         },
 
@@ -157,11 +156,9 @@ export const useGameStore = create<GameState>((set, get) => ({
         set({ 
             showBombModal: false,
             allCardsRevealed: true,
-            counter: totalFromAllCards, // Set total sum from all cards
-            isGameOver: true // Game ends
+            counter: totalFromAllCards,
+            isGameOver: true
         });
-        
-        // Don't show second modal - game just ends
     },
 
     // Defuse bomb
@@ -173,8 +170,6 @@ export const useGameStore = create<GameState>((set, get) => ({
     saveResources: () => {
         set({ 
             showBombSaveModal: false,
-            // Don't set isGameOver: true - game continues
-            // Don't change allCardsRevealed - cards remain in current state
         });
     },
 
@@ -184,7 +179,7 @@ export const useGameStore = create<GameState>((set, get) => ({
             counter: 0,
             showBombSaveModal: false,
             isGameOver: true,
-            allCardsRevealed: true // Reveal all cards when losing resources
+            allCardsRevealed: true
         });
     },
 
@@ -194,7 +189,6 @@ export const useGameStore = create<GameState>((set, get) => ({
             counter: 0,
             showStopModal: false,
             isGameOver: false,
-            // Not resetting isGameStopped - game remains stopped
         });
     },
 

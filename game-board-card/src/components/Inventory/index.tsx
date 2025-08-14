@@ -16,8 +16,7 @@ export default function Inventory() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
         >
-            {/* Cash */}
-            <motion.div 
+            <motion.div
                 className="flex items-center gap-1 sm:gap-2"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}
@@ -26,8 +25,7 @@ export default function Inventory() {
                 <span className="text-white font-bold text-sm sm:text-base md:text-lg">{inventory.cash}</span>
             </motion.div>
 
-            {/* X2 */}
-            <motion.div 
+            <motion.div
                 className="flex items-center gap-1 sm:gap-2"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}
@@ -36,8 +34,7 @@ export default function Inventory() {
                 <span className="text-white font-bold text-sm sm:text-base md:text-lg">{inventory.x2}</span>
             </motion.div>
 
-            {/* Zero */}
-            <motion.div 
+            <motion.div
                 className="flex items-center gap-1 sm:gap-2"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}
@@ -46,8 +43,7 @@ export default function Inventory() {
                 <span className="text-white font-bold text-sm sm:text-base md:text-lg">{inventory.zero}</span>
             </motion.div>
 
-            {/* Bomb */}
-            <motion.div 
+            <motion.div
                 className="flex items-center gap-1 sm:gap-2"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}
@@ -56,8 +52,7 @@ export default function Inventory() {
                 <span className="text-white font-bold text-sm sm:text-base md:text-lg">{inventory.bomb}</span>
             </motion.div>
 
-            {/* Stop */}
-            <motion.div 
+            <motion.div
                 className="flex items-center gap-1 sm:gap-2"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}

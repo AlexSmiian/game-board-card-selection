@@ -16,14 +16,9 @@ export default function CardWrapper() {
         setShuffledCards(shuffled);
     }, []);
 
-    const handleCardFlip = () => {
-        // setFlippedCards(prev => new Set(prev).add(cardData.id)); // This line is removed
-    };
-
     const handleNewGame = () => {
         const shuffled = shuffleArray(cardData);
         setShuffledCards(shuffled);
-        // setFlippedCards(new Set()); // This line is removed
         newGame();
     };
 
@@ -39,7 +34,6 @@ export default function CardWrapper() {
                     <Card
                         key={`${card.id}-${index}`}
                         cardData={card}
-                        onFlip={handleCardFlip}
                         cashCounterRef={cashCounterRef}
                     />
                 ))}

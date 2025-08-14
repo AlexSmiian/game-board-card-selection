@@ -33,7 +33,7 @@ export default function ClaimModal({ isOpen, onClose, onClaim }: ClaimModalProps
                     exit={{ scale: 0.8, opacity: 0, y: 50 }}
                     transition={{ type: "spring", damping: 25, stiffness: 300 }}
                 >
-                    {/* Анімований фон */}
+                    {/* Animated background */}
                     <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-3xl"
                         animate={{ 
@@ -64,7 +64,6 @@ export default function ClaimModal({ isOpen, onClose, onClaim }: ClaimModalProps
                         </motion.p>
                     </div>
 
-                    {/* Загальна сума */}
                     <motion.div
                         className="bg-gradient-to-r from-green-500/20 to-green-600/20 rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 relative z-10 border border-green-500/30"
                         initial={{ opacity: 0, y: 20 }}
@@ -83,7 +82,6 @@ export default function ClaimModal({ isOpen, onClose, onClaim }: ClaimModalProps
                         </div>
                     </motion.div>
 
-                    {/* Детальний інвентар */}
                     <motion.div
                         className="bg-gray-800/50 rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 relative z-10"
                         initial={{ opacity: 0, y: 20 }}
@@ -94,8 +92,7 @@ export default function ClaimModal({ isOpen, onClose, onClaim }: ClaimModalProps
                             Your Collection:
                         </h3>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-                            {/* Cash */}
-                            <motion.div 
+                            <motion.div
                                 className="flex flex-col items-center gap-2 p-3 bg-green-500/20 rounded-xl border border-green-500/30"
                                 initial={{ scale: 0, rotate: -180 }}
                                 animate={{ scale: 1, rotate: 0 }}
@@ -106,8 +103,7 @@ export default function ClaimModal({ isOpen, onClose, onClaim }: ClaimModalProps
                                 <span className="text-green-400 text-xs">Cash</span>
                             </motion.div>
 
-                            {/* X2 */}
-                            <motion.div 
+                            <motion.div
                                 className="flex flex-col items-center gap-2 p-3 bg-blue-500/20 rounded-xl border border-blue-500/30"
                                 initial={{ scale: 0, rotate: -180 }}
                                 animate={{ scale: 1, rotate: 0 }}
@@ -118,8 +114,7 @@ export default function ClaimModal({ isOpen, onClose, onClaim }: ClaimModalProps
                                 <span className="text-blue-400 text-xs">Multiplier</span>
                             </motion.div>
 
-                            {/* Zero */}
-                            <motion.div 
+                            <motion.div
                                 className="flex flex-col items-center gap-2 p-3 bg-yellow-500/20 rounded-xl border border-yellow-500/30"
                                 initial={{ scale: 0, rotate: -180 }}
                                 animate={{ scale: 1, rotate: 0 }}
@@ -130,8 +125,7 @@ export default function ClaimModal({ isOpen, onClose, onClaim }: ClaimModalProps
                                 <span className="text-white font-bold text-sm sm:text-base">{inventory.zero}</span>
                             </motion.div>
 
-                            {/* Bomb */}
-                            <motion.div 
+                            <motion.div
                                 className="flex flex-col items-center gap-2 p-3 bg-red-500/20 rounded-xl border border-red-500/30"
                                 initial={{ scale: 0, rotate: -180 }}
                                 animate={{ scale: 1, rotate: 0 }}
@@ -142,8 +136,7 @@ export default function ClaimModal({ isOpen, onClose, onClaim }: ClaimModalProps
                                 <span className="text-white font-bold text-sm sm:text-base">{inventory.bomb}</span>
                             </motion.div>
 
-                            {/* Stop */}
-                            <motion.div 
+                            <motion.div
                                 className="flex flex-col items-center gap-2 p-3 bg-orange-500/20 rounded-xl border border-orange-500/30"
                                 initial={{ scale: 0, rotate: -180 }}
                                 animate={{ scale: 1, rotate: 0 }}
@@ -156,7 +149,6 @@ export default function ClaimModal({ isOpen, onClose, onClaim }: ClaimModalProps
                         </div>
                     </motion.div>
 
-                    {/* Кнопки */}
                     <div className="flex flex-col gap-3 relative z-10">
                         <motion.button
                             className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-2xl text-lg sm:text-xl shadow-lg hover:from-green-600 hover:to-green-700 transition-all duration-200 transform hover:scale-105"

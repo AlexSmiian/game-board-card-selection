@@ -30,7 +30,6 @@ export default function Navigation() {
             animate={{ y: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
         >
-            {/* Home indicator line */}
             <div className="w-32 h-1 bg-white/30 rounded-full mx-auto mb-2" />
             
             <div className="flex items-center justify-around px-2 sm:px-4 py-2 sm:py-3">
@@ -53,7 +52,6 @@ export default function Navigation() {
                         />
                         <span className="text-xs font-medium">{item.label}</span>
                         
-                        {/* Active indicator */}
                         {activeTab === item.id && (
                             <motion.div
                                 className="w-1 h-1 bg-blue-400 rounded-full mt-1"

@@ -37,27 +37,15 @@ export default function Card({ cardData, onFlip, cashCounterRef }: CardProps) {
             setFlipped(true);
             addFlippedCard(cardData.id);
             updateInventory();
-            // Don't trigger card effects when automatically opening
-            // processCardEffect(cardData);
-            // onFlip?.(cardData);
         }
     }, [allCardsRevealed, flipped, cardData, onFlip, addFlippedCard, updateInventory]);
-
-    // Preserve card flip state when allCardsRevealed changes
-    useEffect(() => {
-        if (!allCardsRevealed && flipped) {
-            // If allCardsRevealed became false, but the card was open,
-            // then leave it open (don't reset flipped)
-        }
-    }, [allCardsRevealed, flipped]);
 
     const processCardEffect = (card: CardData) => {
         if (card.cash && card.cash !== 0) {
             const finalValue = card.cash * multiplier;
-            // Add delay for counter update so animation completes first
             setTimeout(() => {
                 addToCounter(finalValue);
-            }, 800); // Delay matches animation duration
+            }, 800);
         } else if (card.x2) {
             triggerX2Effect();
             setTimeout(() => {
@@ -66,14 +54,12 @@ export default function Card({ cardData, onFlip, cashCounterRef }: CardProps) {
             }, 1500);
         } else if (card.stop) {
             setTimeout(() => {
-                setGameStopped(true); // Set game stopped state
+                setGameStopped(true);
                 showStopModalAction();
             }, 1000);
         } else if (card.bomb) {
-            // Trigger field explosion effect
             triggerBombFieldEffect();
             setTimeout(() => {
-                // Show save resources modal immediately
                 useGameStore.setState({
                     showBombSaveModal: true
                 });
@@ -92,8 +78,7 @@ export default function Card({ cardData, onFlip, cashCounterRef }: CardProps) {
                 const startRect = cardRef.current.getBoundingClientRect();
                 const endRect = cashCounterRef.current.getBoundingClientRect();
 
-                // Use fixed coordinates for testing
-                const startPos = { 
+                const startPos = {
                     x: startRect.left + startRect.width / 2, 
                     y: startRect.top + startRect.height / 2 
                 };

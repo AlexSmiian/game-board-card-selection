@@ -34,14 +34,13 @@ export default function BombSaveModal({
                 exit={{ scale: 0.8, opacity: 0, y: 50 }}
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
             >
-                {/* Фоновий ефект */}
+                {/* Background effect */}
                 <motion.div
                     className="absolute inset-0 bg-red-500/10 rounded-3xl"
                     animate={{ opacity: [0.1, 0.2, 0.1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                 />
 
-                {/* Заголовок */}
                 <div className="text-center mb-4 sm:mb-6 relative z-10">
                     <motion.h2
                         className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-400 mb-2"
@@ -61,7 +60,7 @@ export default function BombSaveModal({
                     </motion.p>
                 </div>
 
-                {/* Показ ресурсів */}
+                {/* Resource display */}
                 <motion.div
                     className="bg-gray-800/50 rounded-2xl p-3 sm:p-4 md:p-6 mb-4 sm:mb-6 relative z-10"
                     initial={{ opacity: 0, y: 20 }}
@@ -80,7 +79,6 @@ export default function BombSaveModal({
                     </div>
                 </motion.div>
 
-                {/* Повідомлення */}
                 <motion.p
                     className="text-center text-gray-300 mb-6 sm:mb-8 text-sm sm:text-base relative z-10"
                     initial={{ opacity: 0 }}
@@ -90,7 +88,6 @@ export default function BombSaveModal({
                     Save your resources and continue playing, or lose them all!
                 </motion.p>
 
-                {/* Кнопки */}
                 <div className="flex flex-col gap-3 sm:gap-4 relative z-10">
                     <motion.button
                         className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-2xl text-base sm:text-lg shadow-lg hover:from-green-600 hover:to-green-700 transition-all duration-200 flex items-center justify-center gap-2"

@@ -24,7 +24,6 @@ export default function X2Effect({ isActive, onComplete }: X2EffectProps) {
 
     return (
         <div className="fixed inset-0 pointer-events-none z-[1000] flex items-center justify-center">
-            {/* Фоновий ефект */}
             <motion.div
                 className="absolute inset-0 bg-blue-500/10"
                 initial={{ opacity: 0 }}
@@ -32,7 +31,6 @@ export default function X2Effect({ isActive, onComplete }: X2EffectProps) {
                 transition={{ duration: 1.5 }}
             />
             
-            {/* Центральний символ X2 */}
             <motion.div
                 className="relative"
                 initial={{ scale: 0, opacity: 0, rotate: -180 }}
@@ -51,7 +49,6 @@ export default function X2Effect({ isActive, onComplete }: X2EffectProps) {
                 </div>
             </motion.div>
 
-            {/* Летючі символи множення */}
             {Array.from({ length: 6 }).map((_, i) => (
                 <motion.div
                     key={`symbol-${i}`}
@@ -78,7 +75,6 @@ export default function X2Effect({ isActive, onComplete }: X2EffectProps) {
                 </motion.div>
             ))}
 
-            {/* Пульсуючі кільця */}
             {Array.from({ length: 3 }).map((_, i) => (
                 <motion.div
                     key={`ring-${i}`}
@@ -96,7 +92,6 @@ export default function X2Effect({ isActive, onComplete }: X2EffectProps) {
                 />
             ))}
 
-            {/* Текст "MULTIPLY!" */}
             <motion.div
                 className="absolute bottom-20 text-4xl font-bold text-blue-400"
                 initial={{ scale: 0, opacity: 0 }}

@@ -29,7 +29,7 @@ export default function BombModal({ isOpen, onTakeHit, onDefuse, defuseCost }: B
                 exit={{ scale: 0.8, opacity: 0, y: 50 }}
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
             >
-                {/* Червоний фоновий ефект */}
+                {/* Red background effect */}
                 <motion.div
                     className="absolute inset-0 bg-red-500/20 rounded-3xl"
                     initial={{ opacity: 0 }}
@@ -37,7 +37,6 @@ export default function BombModal({ isOpen, onTakeHit, onDefuse, defuseCost }: B
                     transition={{ delay: 0.3 }}
                 />
 
-                {/* Заголовок */}
                 <div className="text-center mb-6 relative z-10">
                     <motion.h2
                         className="text-4xl font-bold text-pink-400 mb-2"
@@ -57,7 +56,6 @@ export default function BombModal({ isOpen, onTakeHit, onDefuse, defuseCost }: B
                     </motion.p>
                 </div>
 
-                {/* Бомба */}
                 <motion.div
                     className="flex justify-center mb-6 relative z-10"
                     initial={{ scale: 0, rotate: -180 }}
@@ -74,7 +72,7 @@ export default function BombModal({ isOpen, onTakeHit, onDefuse, defuseCost }: B
                     </div>
                 </motion.div>
 
-                {/* Втрата грошей */}
+                {/* Loss of money */}
                 <motion.div
                     className="flex items-center justify-center gap-3 mb-6 relative z-10"
                     initial={{ opacity: 0, y: 20 }}
@@ -88,7 +86,7 @@ export default function BombModal({ isOpen, onTakeHit, onDefuse, defuseCost }: B
                     />
                 </motion.div>
 
-                {/* Інструкція */}
+                {/* Instructions */}
                 <motion.p
                     className="text-center text-gray-300 mb-8 relative z-10"
                     initial={{ opacity: 0 }}
@@ -98,7 +96,6 @@ export default function BombModal({ isOpen, onTakeHit, onDefuse, defuseCost }: B
                     ...or defuse it and save your run!
                 </motion.p>
 
-                {/* Кнопки */}
                 <div className="flex gap-4 relative z-10">
                     <motion.button
                         className="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold py-4 px-6 rounded-2xl text-lg shadow-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 flex items-center justify-center gap-2"

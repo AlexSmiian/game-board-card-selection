@@ -8,7 +8,7 @@ export default function CashAnimationLayer() {
         <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[999] bg-transparent">
             {animations.map((anim) => (
                 <div key={anim.id}>
-                    {/* Основна анімація */}
+                    {/* Main animation */}
                     <motion.img
                         src={anim.src}
                         alt="Cash"
@@ -25,7 +25,6 @@ export default function CashAnimationLayer() {
                             y: anim.end.y - 16,
                             opacity: [1, 1, 0],
                             scale: [1, 1.2, 0.8],
-                            // rotate: [0, 180, 360],
                         }}
                         transition={{
                             duration: 0.8,
@@ -46,7 +45,7 @@ export default function CashAnimationLayer() {
                         onAnimationComplete={() => removeAnimation(anim.id)}
                     />
                     
-                    {/* Друга копія з затримкою */}
+                    {/* Second copy with delay */}
                     <motion.img
                         src={anim.src}
                         alt="Cash"
@@ -63,7 +62,6 @@ export default function CashAnimationLayer() {
                             y: anim.end.y - 16,
                             opacity: [1, 0.7, 0],
                             scale: [0.8, 1, 0.6],
-                            // rotate: [0, 180, 360],
                         }}
                         transition={{
                             duration: 0.8,
@@ -87,7 +85,7 @@ export default function CashAnimationLayer() {
                         }}
                     />
                     
-                    {/* Третя копія з більшою затримкою */}
+                    {/* Third copy with a longer delay */}
                     <motion.img
                         src={anim.src}
                         alt="Cash"
@@ -104,7 +102,6 @@ export default function CashAnimationLayer() {
                             y: anim.end.y - 16,
                             opacity: [1, 0.7, 0],
                             scale: [0.6, 0.8, 0.4],
-                            // rotate: [0, 180, 360],
                         }}
                         transition={{
                             duration: 0.8,

@@ -24,7 +24,6 @@ export default function StopEffect({ isActive, onComplete }: StopEffectProps) {
 
     return (
         <div className="fixed inset-0 pointer-events-none z-[1000] flex items-center justify-center">
-            {/* Фоновий ефект */}
             <motion.div
                 className="absolute inset-0 bg-red-500/15"
                 initial={{ opacity: 0 }}
@@ -32,7 +31,6 @@ export default function StopEffect({ isActive, onComplete }: StopEffectProps) {
                 transition={{ duration: 2 }}
             />
             
-            {/* Центральний символ STOP */}
             <motion.div
                 className="relative"
                 initial={{ scale: 0, opacity: 0 }}
@@ -50,7 +48,6 @@ export default function StopEffect({ isActive, onComplete }: StopEffectProps) {
                 </div>
             </motion.div>
 
-            {/* Пульсуючі кільця */}
             {Array.from({ length: 4 }).map((_, i) => (
                 <motion.div
                     key={`ring-${i}`}
@@ -68,7 +65,6 @@ export default function StopEffect({ isActive, onComplete }: StopEffectProps) {
                 />
             ))}
 
-            {/* Летючі символи STOP */}
             {Array.from({ length: 8 }).map((_, i) => (
                 <motion.div
                     key={i}
@@ -95,7 +91,6 @@ export default function StopEffect({ isActive, onComplete }: StopEffectProps) {
                 </motion.div>
             ))}
 
-            {/* Текст "ГРА ЗУПИНЕНА!" */}
             <motion.div
                 className="absolute bottom-20 text-5xl font-bold text-red-400"
                 initial={{ scale: 0, opacity: 0 }}
@@ -111,7 +106,6 @@ export default function StopEffect({ isActive, onComplete }: StopEffectProps) {
                 STOP GAME!
             </motion.div>
 
-            {/* Додаткові ефекти зупинки */}
             <motion.div
                 className="absolute top-10 left-10 text-3xl"
                 initial={{ opacity: 0, rotate: -10 }}

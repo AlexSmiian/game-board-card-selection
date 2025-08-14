@@ -15,7 +15,7 @@ export default function CounterUp({ value, className = "", duration = 1.5 }: Cou
     useEffect(() => {
         const controls = animate(count, value, {
             duration: duration,
-            ease: [0.25, 0.46, 0.45, 0.94], // Bezier curve for smoothness
+            ease: [0.25, 0.46, 0.45, 0.94],
             onUpdate: (latest) => {
                 setDisplayValue(Math.round(latest));
             },

@@ -24,7 +24,7 @@ export default function BombEffect({ isActive, onComplete }: BombEffectProps) {
 
     return (
         <div className="fixed inset-0 pointer-events-none z-[1000] flex items-center justify-center">
-            {/* Вибуховий ефект */}
+            {/* Explosive effect */}
             <motion.div
                 className="absolute inset-0 bg-red-500/20"
                 initial={{ opacity: 0 }}
@@ -32,7 +32,7 @@ export default function BombEffect({ isActive, onComplete }: BombEffectProps) {
                 transition={{ duration: 2 }}
             />
             
-            {/* Центральний вибух */}
+            {/* Central explosion */}
             <motion.div
                 className="relative"
                 initial={{ scale: 0, opacity: 0 }}
@@ -50,7 +50,7 @@ export default function BombEffect({ isActive, onComplete }: BombEffectProps) {
                 </div>
             </motion.div>
 
-            {/* Частинки вибуху */}
+            {/* Explosion particles */}
             {Array.from({ length: 8 }).map((_, i) => (
                 <motion.div
                     key={i}
@@ -75,7 +75,6 @@ export default function BombEffect({ isActive, onComplete }: BombEffectProps) {
                 />
             ))}
 
-            {/* Текст "BOOM!" */}
             <motion.div
                 className="absolute text-8xl font-bold text-red-500"
                 initial={{ scale: 0, opacity: 0 }}

@@ -51,8 +51,8 @@ function App() {
     };
 
     const handleStopModalClaim = () => {
-        hideStopModalAction(); // Close StopModal
-        handleOpenClaimModal(); // Open ClaimModal
+        hideStopModalAction();
+        handleOpenClaimModal();
     };
     
     return (

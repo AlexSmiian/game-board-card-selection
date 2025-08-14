@@ -24,7 +24,7 @@ export default function BombFieldEffect({ isActive, onComplete }: BombFieldEffec
 
     return (
         <div className="fixed inset-0 pointer-events-none z-[1500]">
-            {/* Фоновий ефект вибуху */}
+            {/* Background explosion effect */}
             <motion.div
                 className="absolute inset-0 bg-red-500/30"
                 initial={{ opacity: 0 }}
@@ -32,7 +32,7 @@ export default function BombFieldEffect({ isActive, onComplete }: BombFieldEffec
                 transition={{ duration: 3 }}
             />
 
-            {/* Хвилі вибуху */}
+            {/* Explosion waves */}
             {Array.from({ length: 5 }).map((_, i) => (
                 <motion.div
                     key={`wave-${i}`}
@@ -56,7 +56,7 @@ export default function BombFieldEffect({ isActive, onComplete }: BombFieldEffec
                 />
             ))}
 
-            {/* Частинки вибуху по всьому полю */}
+            {/* Explosion particles across the field */}
             {Array.from({ length: 20 }).map((_, i) => (
                 <motion.div
                     key={`particle-${i}`}
@@ -81,7 +81,7 @@ export default function BombFieldEffect({ isActive, onComplete }: BombFieldEffec
                 />
             ))}
 
-            {/* Центральний вибух */}
+            {/* Central explosion */}
             <motion.div
                 className="absolute top-1/2 left-1/2 w-32 h-32"
                 style={{
@@ -102,7 +102,6 @@ export default function BombFieldEffect({ isActive, onComplete }: BombFieldEffec
                 </div>
             </motion.div>
 
-            {/* Текст "BOOM!" */}
             <motion.div
                 className="absolute top-1/2 left-1/2 text-8xl font-bold text-red-500"
                 style={{
@@ -121,7 +120,7 @@ export default function BombFieldEffect({ isActive, onComplete }: BombFieldEffec
                 BOOM!
             </motion.div>
 
-            {/* Додаткові ефекти */}
+            {/* Additional effects */}
             <motion.div
                 className="absolute top-10 left-10 text-4xl"
                 initial={{ opacity: 0, rotate: -10 }}
