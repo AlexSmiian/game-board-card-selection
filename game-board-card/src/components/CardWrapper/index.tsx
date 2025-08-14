@@ -18,12 +18,6 @@ export default function CardWrapper() {
         setFlippedCards(prev => new Set(prev).add(cardData.id));
     };
 
-    const resetGame = () => {
-        const shuffled = shuffleArray(cardData);
-        setShuffledCards(shuffled);
-        setFlippedCards(new Set());
-    };
-
     return (
         <div className="flex flex-col items-center">
             <div className="grid grid-cols-3 grid-rows-3 gap-4 w-full mt-10 max-w-md">
@@ -35,16 +29,6 @@ export default function CardWrapper() {
                         cashCounterRef={cashCounterRef}
                     />
                 ))}
-            </div>
-            <button
-                onClick={resetGame}
-                className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-                New Game
-            </button>
-
-            <div className="mt-4 text-sm text-white/60">
-                Cards flipped: {flippedCards.size}/9
             </div>
         </div>
     );

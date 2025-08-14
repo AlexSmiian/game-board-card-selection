@@ -8,7 +8,8 @@ export const cardData = [
     {
       "src": bombImg,
       "cash": null,
-      "id": "1"
+      "id": "1",
+      "bomb": true
     },
     {
       "src": cardCashImg,

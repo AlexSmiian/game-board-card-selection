@@ -4,6 +4,7 @@ export interface CardData {
     id: string;
     x2?: boolean;
     stop?: boolean;
+    bomb?: boolean;
     onFlip?: (cardData: CardData) => void;
 }
 
