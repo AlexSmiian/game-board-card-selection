@@ -1,19 +1,16 @@
 import { motion } from "framer-motion";
-import { formatCash } from "../../utils/gameUtils";
 import { useGameStore } from "../../store/gameStore";
 import cashImg from '../../assets/cash.png';
-import bombImg from '../../assets/bomb.png';
 import CounterUp from "../CounterUp";
 
 interface BombModalProps {
     isOpen: boolean;
-    onClose: () => void;
     onTakeHit: () => void;
     onDefuse: () => void;
     defuseCost: number;
 }
 
-export default function BombModal({ isOpen, onClose, onTakeHit, onDefuse, defuseCost }: BombModalProps) {
+export default function BombModal({ isOpen, onTakeHit, onDefuse, defuseCost }: BombModalProps) {
     const counter = useGameStore((state) => state.counter);
 
     if (!isOpen) return null;
@@ -73,7 +70,7 @@ export default function BombModal({ isOpen, onClose, onTakeHit, onDefuse, defuse
                             animate={{ scale: [1, 1.2, 1] }}
                             transition={{ duration: 2, repeat: Infinity }}
                         />
-                        <img src={bombImg} alt="Bomb" className="w-24 h-24 relative z-10" />
+                        <img src={cashImg} alt="Bomb" className="w-24 h-24 relative z-10" />
                     </div>
                 </motion.div>
 

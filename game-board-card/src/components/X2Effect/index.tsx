@@ -15,7 +15,7 @@ export default function X2Effect({ isActive, onComplete }: X2EffectProps) {
             const timer = setTimeout(() => {
                 setShowEffect(false);
                 onComplete();
-            }, 1500);
+            }, 2000);
             return () => clearTimeout(timer);
         }
     }, [isActive, onComplete]);
@@ -54,7 +54,7 @@ export default function X2Effect({ isActive, onComplete }: X2EffectProps) {
             {/* Летючі символи множення */}
             {Array.from({ length: 6 }).map((_, i) => (
                 <motion.div
-                    key={i}
+                    key={`symbol-${i}`}
                     className="absolute text-4xl font-bold text-blue-400"
                     initial={{
                         x: 0,
@@ -84,7 +84,7 @@ export default function X2Effect({ isActive, onComplete }: X2EffectProps) {
                     key={`ring-${i}`}
                     className="absolute w-40 h-40 border-4 border-blue-400 rounded-full"
                     initial={{ scale: 0, opacity: 1 }}
-                    animate={{ 
+                    animate={{
                         scale: [0, 3],
                         opacity: [1, 0]
                     }}
@@ -96,20 +96,20 @@ export default function X2Effect({ isActive, onComplete }: X2EffectProps) {
                 />
             ))}
 
-            {/* Текст "МНОЖЕННЯ!" */}
+            {/* Текст "MULTIPLY!" */}
             <motion.div
                 className="absolute bottom-20 text-4xl font-bold text-blue-400"
                 initial={{ scale: 0, opacity: 0 }}
-                animate={{ 
+                animate={{
                     scale: [0, 1.2, 1],
                     opacity: [0, 1, 0]
                 }}
-                transition={{ 
+                transition={{
                     duration: 1.5,
                     delay: 0.5
                 }}
             >
-                МНОЖЕННЯ!
+                MULTIPLY!
             </motion.div>
         </div>
     );

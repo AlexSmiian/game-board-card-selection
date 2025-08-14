@@ -1,4 +1,3 @@
-import { formatCash } from "../../utils/gameUtils.ts";
 import { useGameStore } from "../../store/gameStore.ts";
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
@@ -14,11 +13,11 @@ const CashCounter = () => {
     const internalRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        // Встановлюємо глобальний ref
+        // Set global ref
         cashCounterRef.current = internalRef.current;
     }, []);
 
-    // Анімація при зміні лічильника
+    // Animation when counter changes
     useEffect(() => {
         if (counter > prevCounter) {
             setIsAnimating(true);
@@ -31,7 +30,7 @@ const CashCounter = () => {
     return (
         <motion.div
             ref={internalRef}
-            className="flex flex-row items-center justify-center gap-1 text-[32px] text-white font-bold mt-8"
+            className="flex flex-row items-center justify-center gap-1 text-[24px] sm:text-[28px] md:text-[32px] text-white font-bold mt-6 sm:mt-8"
             animate={isAnimating ? {
                 scale: [1, 1.1, 1],
                 transition: {
@@ -40,10 +39,10 @@ const CashCounter = () => {
                 }
             } : {}}
         >
-            <img src={cashImg} width={40} height={40} alt="Cash" />
+            <img src={cashImg} className="w-[32px] h-[32px] sm:w-[36px] sm:h-[36px] md:w-[40px] md:h-[40px]" alt="Cash" />
             <CounterUp 
                 value={counter} 
-                className="text-[32px] font-bold text-white"
+                className="text-[24px] sm:text-[28px] md:text-[32px] font-bold text-white"
             />
         </motion.div>
     );

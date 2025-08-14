@@ -12,8 +12,16 @@ interface GameState {
     defuseCost: number;
     saveCost: number;
     allCardsRevealed: boolean;
+    flippedCards: Set<string>;
+    inventory: {
+        cash: number;
+        x2: number;
+        zero: number;
+        bomb: number;
+        stop: number;
+    };
 
-    // Дії для оновлення стану
+    // Actions for updating state
     updateCounter: (amount: number) => void;
     addToCounter: (amount: number) => void;
     setMultiplier: (multiplier: number) => void;
@@ -34,6 +42,8 @@ interface GameState {
     newGame: () => void;
     revealAllCards: () => void;
     resetGame: () => void;
+    updateInventory: () => void;
+    addFlippedCard: (cardId: string) => void;
 }
 
 interface CashAnimation {
@@ -61,7 +71,7 @@ interface SpecialEffectsState {
     resetEffects: () => void;
 }
 
-// Функція для обчислення загальної суми з усіх карток
+    // Function to calculate total sum from all cards
 const calculateTotalFromAllCards = (multiplier: number) => {
     return cardData.reduce((total, card) => {
         if (card.cash && card.cash !== 0) {
@@ -82,56 +92,64 @@ export const useGameStore = create<GameState>((set, get) => ({
     defuseCost: 49,
     saveCost: 99,
     allCardsRevealed: false,
+    flippedCards: new Set(),
+    inventory: {
+        cash: 0,
+        x2: 0,
+        zero: 0,
+        bomb: 0,
+        stop: 0,
+    },
     updateCounter: (amount: number) => set((state) => ({
         counter: state.counter + amount
     })),
 
-    // Додає до поточного counter
-    addToCounter: (amount: number) => set((state) => ({
-        counter: state.counter + amount
-    })),
+            // Add to current counter
+        addToCounter: (amount: number) => set((state) => ({
+            counter: state.counter + amount
+        })),
 
-    // Встановлює множник
-    setMultiplier: (multiplier: number) => set({ multiplier }),
+        // Set multiplier
+        setMultiplier: (multiplier: number) => set({ multiplier }),
 
-    // Помножує поточний counter на фактор
-    multiplyCounter: (factor: number) => set((state) => ({
-        counter: state.counter * factor
-    })),
+        // Multiply current counter by factor
+        multiplyCounter: (factor: number) => set((state) => ({
+            counter: state.counter * factor
+        })),
 
-    // Встановлює стан "Гра закінчена"
-    setGameOver: (gameOver: boolean) => set({ isGameOver: gameOver }),
+        // Set "Game Over" state
+        setGameOver: (gameOver: boolean) => set({ isGameOver: gameOver }),
 
-    // Встановлює стан "Гра зупинена"
-    setGameStopped: (gameStopped: boolean) => set({ isGameStopped: gameStopped }),
+        // Set "Game Stopped" state
+        setGameStopped: (gameStopped: boolean) => set({ isGameStopped: gameStopped }),
 
-    // Показує модальне вікно STOP
-    showStopModalAction: () => set({ showStopModal: true }),
+        // Show STOP modal
+        showStopModalAction: () => set({ showStopModal: true }),
 
-    // Приховує модальне вікно STOP
-    hideStopModalAction: () => set({ showStopModal: false }),
+        // Hide STOP modal
+        hideStopModalAction: () => set({ showStopModal: false }),
 
-    // Показує модальне вікно BOMB
-    showBombModalAction: () => set({ showBombModal: true }),
+        // Show BOMB modal
+        showBombModalAction: () => set({ showBombModal: true }),
 
-    // Приховує модальне вікно BOMB
-    hideBombModalAction: () => set({ showBombModal: false }),
+        // Hide BOMB modal
+        hideBombModalAction: () => set({ showBombModal: false }),
 
-    // Показує модальне вікно збереження ресурсів
-    showBombSaveModalAction: () => {
-        const { multiplier } = get();
-        const totalFromAllCards = calculateTotalFromAllCards(multiplier);
-        set({ 
-            showBombSaveModal: true,
-            counter: totalFromAllCards,
-            // Не встановлюємо allCardsRevealed одразу - це буде зроблено тільки при loseResources
-        });
-    },
+        // Show save resources modal
+        showBombSaveModalAction: () => {
+            const { multiplier } = get();
+            const totalFromAllCards = calculateTotalFromAllCards(multiplier);
+            set({
+                showBombSaveModal: true,
+                counter: totalFromAllCards,
+                // Don't set allCardsRevealed immediately - this will be done only with loseResources
+            });
+        },
 
-    // Приховує модальне вікно збереження ресурсів
-    hideBombSaveModalAction: () => set({ showBombSaveModal: false }),
+        // Hide save resources modal
+        hideBombSaveModalAction: () => set({ showBombSaveModal: false }),
 
-    // Прийняти удар від бомби
+    // Take hit from bomb
     takeHit: () => {
         const { multiplier } = get();
         const totalFromAllCards = calculateTotalFromAllCards(multiplier);
@@ -139,69 +157,75 @@ export const useGameStore = create<GameState>((set, get) => ({
         set({ 
             showBombModal: false,
             allCardsRevealed: true,
-            counter: totalFromAllCards, // Встановлюємо загальну суму з усіх карток
-            isGameOver: true // Гра завершується
+            counter: totalFromAllCards, // Set total sum from all cards
+            isGameOver: true // Game ends
         });
         
-        // Не показуємо другу модалку - гра просто завершується
+        // Don't show second modal - game just ends
     },
 
-    // Знешкодити бомбу
+    // Defuse bomb
     defuseBomb: () => {
         set({ showBombModal: false });
     },
 
-    // Зберегти ресурси
+    // Save resources
     saveResources: () => {
-        const { counter } = get();
         set({ 
             showBombSaveModal: false,
-            // Не встановлюємо isGameOver: true - гра продовжується
-            // Не змінюємо allCardsRevealed - картки залишаються в поточному стані
+            // Don't set isGameOver: true - game continues
+            // Don't change allCardsRevealed - cards remain in current state
         });
     },
 
-    // Втратити ресурси
+    // Lose resources
     loseResources: () => {
-        set({ 
+        set({
             counter: 0,
             showBombSaveModal: false,
             isGameOver: true,
-            allCardsRevealed: true // Відкриваємо всі картки при втраті ресурсів
+            allCardsRevealed: true // Reveal all cards when losing resources
         });
     },
 
-    // Забрати винагороди
+    // Claim rewards
     claimRewards: () => {
-        const { counter } = get();
-        set({ 
-            counter: 0, 
-            showStopModal: false, 
-            isGameOver: false, 
-            // Не скидаємо isGameStopped - гра залишається зупиненою
+        set({
+            counter: 0,
+            showStopModal: false,
+            isGameOver: false,
+            // Not resetting isGameStopped - game remains stopped
         });
     },
 
-    // Почати нову гру
+    // Start new game
     newGame: () => {
-        set({ 
-            counter: 0, 
+        set({
+            counter: 0,
             multiplier: 1,
-            showStopModal: false, 
-            isGameOver: false, 
+            showStopModal: false,
+            isGameOver: false,
             isGameStopped: false,
             showBombModal: false,
             showBombSaveModal: false,
             allCardsRevealed: false,
+            flippedCards: new Set(),
+            inventory: {
+                cash: 0,
+                x2: 0,
+                zero: 0,
+                bomb: 0,
+                stop: 0,
+            },
         });
     },
 
-    // Відкрити всі картки
+    // Reveal all cards
     revealAllCards: () => {
         set({ allCardsRevealed: true });
     },
 
-    // Скидає гру до початкових значень
+    // Reset game to initial values
     resetGame: () => set({
         counter: 0,
         multiplier: 1,
@@ -211,7 +235,52 @@ export const useGameStore = create<GameState>((set, get) => ({
         showBombModal: false,
         showBombSaveModal: false,
         allCardsRevealed: false,
+        flippedCards: new Set(),
+        inventory: {
+            cash: 0,
+            x2: 0,
+            zero: 0,
+            bomb: 0,
+            stop: 0,
+        },
     }),
+
+    // Update inventory based on opened cards
+    updateInventory: () => {
+        const { flippedCards } = get();
+        const newInventory = {
+            cash: 0,
+            x2: 0,
+            zero: 0,
+            bomb: 0,
+            stop: 0,
+        };
+
+        // Count quantity of each card type
+        cardData.forEach((card) => {
+            if (flippedCards.has(card.id)) {
+                if (card.cash && card.cash !== 0) {
+                    newInventory.cash++;
+                } else if (card.x2) {
+                    newInventory.x2++;
+                } else if (card.cash === 0) {
+                    newInventory.zero++;
+                } else if (card.bomb) {
+                    newInventory.bomb++;
+                } else if (card.stop) {
+                    newInventory.stop++;
+                }
+            }
+        });
+
+        set({ inventory: newInventory });
+    },
+
+    addFlippedCard: (cardId: string) => {
+        set((state) => ({
+            flippedCards: new Set(state.flippedCards).add(cardId)
+        }));
+    },
 }));
 
 let idCounter = 0;

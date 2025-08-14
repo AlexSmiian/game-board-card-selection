@@ -26,35 +26,38 @@ export default function Card({ cardData, onFlip, cashCounterRef }: CardProps) {
         isGameStopped, 
         setGameStopped,
         showStopModalAction,
-        showBombModalAction,
-        allCardsRevealed
+        allCardsRevealed,
+        addFlippedCard,
+        updateInventory
     } = useGameStore();
 
-    // Автоматично відкриваємо картку, якщо всі картки повинні бути відкриті
+    // Automatically open card if all cards should be revealed
     useEffect(() => {
         if (allCardsRevealed && !flipped) {
             setFlipped(true);
-            // При автоматичному відкритті не запускаємо ефекти карток
+            addFlippedCard(cardData.id);
+            updateInventory();
+            // Don't trigger card effects when automatically opening
             // processCardEffect(cardData);
             // onFlip?.(cardData);
         }
-    }, [allCardsRevealed, flipped, cardData, onFlip]);
+    }, [allCardsRevealed, flipped, cardData, onFlip, addFlippedCard, updateInventory]);
 
-    // Зберігаємо стан відкриття картки при зміні allCardsRevealed
+    // Preserve card flip state when allCardsRevealed changes
     useEffect(() => {
         if (!allCardsRevealed && flipped) {
-            // Якщо allCardsRevealed стало false, але картка була відкрита,
-            // то залишаємо її відкритою (не скидаємо flipped)
+            // If allCardsRevealed became false, but the card was open,
+            // then leave it open (don't reset flipped)
         }
     }, [allCardsRevealed, flipped]);
 
     const processCardEffect = (card: CardData) => {
         if (card.cash && card.cash !== 0) {
             const finalValue = card.cash * multiplier;
-            // Додаємо затримку для оновлення лічильника, щоб анімація завершилася спочатку
+            // Add delay for counter update so animation completes first
             setTimeout(() => {
                 addToCounter(finalValue);
-            }, 800); // Затримка відповідає тривалості анімації
+            }, 800); // Delay matches animation duration
         } else if (card.x2) {
             triggerX2Effect();
             setTimeout(() => {
@@ -63,14 +66,14 @@ export default function Card({ cardData, onFlip, cashCounterRef }: CardProps) {
             }, 1500);
         } else if (card.stop) {
             setTimeout(() => {
-                setGameStopped(true); // Встановлюємо стан зупинки гри
+                setGameStopped(true); // Set game stopped state
                 showStopModalAction();
             }, 1000);
         } else if (card.bomb) {
-            // Запускаємо ефект вибуху на всьому полі
+            // Trigger field explosion effect
             triggerBombFieldEffect();
             setTimeout(() => {
-                // Показуємо модалку збереження ресурсів одразу
+                // Show save resources modal immediately
                 useGameStore.setState({
                     showBombSaveModal: true
                 });
@@ -81,13 +84,15 @@ export default function Card({ cardData, onFlip, cashCounterRef }: CardProps) {
     const handleClick = () => {
         if (!flipped && !isGameOver && !isGameStopped) {
             setFlipped(true);
+            addFlippedCard(cardData.id);
+            updateInventory();
             
-            // Запускаємо анімацію тільки для карток з грошима
+            // Start animation only for cash cards
             if (cardData.cash && cardData.cash !== 0 && cardRef.current && cashCounterRef.current) {
                 const startRect = cardRef.current.getBoundingClientRect();
                 const endRect = cashCounterRef.current.getBoundingClientRect();
 
-                // Використовуємо фіксовані координати для тестування
+                // Use fixed coordinates for testing
                 const startPos = { 
                     x: startRect.left + startRect.width / 2, 
                     y: startRect.top + startRect.height / 2 
@@ -108,7 +113,7 @@ export default function Card({ cardData, onFlip, cashCounterRef }: CardProps) {
     return (
         <motion.div
             ref={cardRef}
-            className="relative w-[110px] h-[110px] overflow-hidden rounded-[12px] cursor-pointer"
+            className="relative w-[80px] h-[80px] sm:w-[110px] sm:h-[110px] overflow-hidden rounded-[12px] cursor-pointer"
             style={{ perspective: "1000px" }}
             onClick={handleClick}
             whileHover={{ 
@@ -142,15 +147,15 @@ export default function Card({ cardData, onFlip, cashCounterRef }: CardProps) {
                     }}
                 >
                     <span
-                        className="text-[2.5rem] font-extrabold leading-[2.5rem] text-white/50"
+                        className="text-[2rem] sm:text-[2.5rem] font-extrabold leading-[2rem] sm:leading-[2.5rem] text-white/50"
                         style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
                     >
                         $
                     </span>
                 </div>
-
+                
                 {/* Back */}
-                <div
+                <div 
                     className="absolute inset-0 flex items-center justify-center rounded-[12px]"
                     style={{
                         backfaceVisibility: "hidden",
@@ -168,14 +173,14 @@ export default function Card({ cardData, onFlip, cashCounterRef }: CardProps) {
                         <div className="flex flex-col items-center justify-center gap-1 relative">
                             <img src={cardData.src} alt="Cash" className="w-full h-full object-none" />
                             <span
-                                className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[16px] font-bold text-white/90"
+                                className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 text-[12px] sm:text-[16px] font-bold text-white/90"
                             >
                                 {formatCash(cardData.cash)}
                             </span>
                         </div>
                     ) : (
-                        <img
-                            src={cardData.src}
+                        <img 
+                            src={cardData.src} 
                             alt={cardData.x2 ? "X2" : cardData.stop ? "Stop" : cardData.bomb ? "Bomb" : "Special"}
                             className="w-full h-full object-none"
                         />
