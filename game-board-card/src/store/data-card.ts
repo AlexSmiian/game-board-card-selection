@@ -1,47 +1,53 @@
- export const cardData = [
+import bombImg from '../assets/bomb.png';
+import cardCashImg from '../assets/card-cash.png';
+import zeroImg from '../assets/zero.png';
+import x2Img from '../assets/x2.png';
+import stopImg from '../assets/stop.png';
+
+export const cardData = [
     {
-      "src": '/bomb.png',
+      "src": bombImg,
       "cash": null,
       "id": "1"
     },
     {
-      "src": '/card-cash.png',
+      "src": cardCashImg,
       "cash": 100,
       "id": "2"
     },
     {
-      "src": '/card-cash.png',
+      "src": cardCashImg,
       "cash": 500,
       "id": "3"
     },
     {
-      "src": '/card-cash.png',
+      "src": cardCashImg,
       "cash": 1000,
       "id": "4"
     },
     {
-      "src": '/card-cash.png',
+      "src": cardCashImg,
       "cash": 10000,
       "id": "5"
     },
     {
-      "src": '/card-cash.png',
+      "src": cardCashImg,
       "cash": 1000000,
       "id": "6"
     },
     {
-      "src": '/zero.png',
+      "src": zeroImg,
       "cash": 0,
       "id": "7"
     },
     {
-      "src": '/x2.png',
+      "src": x2Img,
       "cash": null,
       "id": "8",
       "x2": true
     },
     {
-      "src": '/stop.png',
+      "src": stopImg,
       "cash": null,
       "id": "9",
       "stop": true

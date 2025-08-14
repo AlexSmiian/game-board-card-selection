@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import type { CardData } from "../../types/type.ts";
 import { cardData } from "../../store/data-card.ts";
 import { shuffleArray } from "../../utils/shuffleArray.ts";
